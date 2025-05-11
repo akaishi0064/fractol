@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chakaish <chakaish@student.42tokyo.jp      +#+  +:+       +#+         #
+#    By: chakaish <chakaish@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/11 13:35:16 by chakaish          #+#    #+#              #
-#    Updated: 2025/05/11 15:17:56 by chakaish         ###   ########.fr        #
+#    Updated: 2025/05/11 15:57:12 by chakaish         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ_DIR		= obj
 #**********#
 #SOURCES
 
-#MLX_SRC		=  \ 
+#MLX_SRC		=  \
 #					mlx_hook.c \
 #					mlx_setup.c \
 #					mlx_utils.c \
@@ -52,9 +52,9 @@ OBJ					= \
 LIBFT_DIR			= libft
 LIBFT				= ${LIBFT_DIR}/libft.a
 
-MLX_DIR				= minilibx
+MLX_DIR				= minilibx-linux
 MLX_LIB				= $(MLX_DIR)/libmlx.a
-	
+
 LFLAGS				= -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lbsd -lm
 
 UNAME				= $(shell uname)
@@ -67,6 +67,22 @@ ifeq ($(UNAME), Darwin)
 							-L$(BREW_PREFIX)/opt/libbsd/lib
 
 		LFLAGS		+= $(X11_INC_DIRS)
+endif
+
+#**********#
+# INCLUDES
+
+
+INC_DIR:= includes
+INCLUDES:= -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
+
+ifeq ($(UNAME), Darwin)
+X11_INC_DIRS:= \
+-I$(BREW_PREFIX)/opt/libx11/include \
+-I$(BREW_PREFIX)/opt/libxext/include \
+-I$(BREW_PREFIX)/opt/libbsd/include
+
+INCLUDES+= $(X11_INC_DIRS)
 endif
 
 #**********#
