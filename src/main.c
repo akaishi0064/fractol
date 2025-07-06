@@ -3,49 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chakaish <chakaish@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akaishichiharu <akaishichiharu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 15:30:34 by chakaish          #+#    #+#             */
-/*   Updated: 2025/05/11 16:39:14 by chakaish         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:07:15 by akaishichih      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	close_window(void)
+int main (int ac, char *av[])
 {
-	exit(0);
-	return (0);
-}
+	double	real;
+	double	imag;
+	int		chk_real;
+	int		chk_imag;
 
-int check_key(int key_nbr)
-{
-	if(key_nbr == 65307)
-		close_window();
-	return (0);
-}
-int	main(int ac, char *av[])
-{
-	t_mlx	mlx;
-
-	(void)ac;
-	(void)av;
-	mlx.ptr = mlx_init();
-	if (!mlx.ptr)
-		return (1);
-	mlx.win = mlx_new_window(mlx.ptr, 500, 500, "fractol");
-	if (!mlx.win)
-		return (mlx_destroy_display(mlx.ptr), free(mlx.ptr), 1);
-	mlx.img.ptr = mlx_new_image(mlx.ptr, 500, 500);
-	if (!mlx.img.ptr)
+	if (ac == 2 && av[1][0] == 'm' && av[1][1] == '\0')
+		mk_mandel();
+	else if(ac == 4 && av[1][0] =='j' && av[1][1] == '\0')
 	{
-		mlx_destroy_window(mlx.ptr, mlx.win);
-		mlx_destroy_display(mlx.ptr);
-		free(mlx.ptr);
-		return (1);
+		chk_real = ft_atof(av[2], &real);
+		chk_imag = ft_atof(av[3], &imag);
+		if(chk_real == 1 || chk_imag == 1)
+			return (error_message());
+		mk_julia(real,imag);
 	}
-	mlx_hook(mlx.win, 17, 0, close_window, 0);
-	mlx_key_hook(mlx.win, check_key, 0);
-	mlx_loop(mlx.ptr);
+	return (error_message());
+}
+
+int ft_atof(char *digit_str, double *num)
+{
+	int i;
+	i = 0;
+
+	if (5 < ft_strlen(digit_str))
+		return (1);
+	if (digit_str[i] == '-')
+		i++;
+	while('0' <= digit_str[i] && digit_str[i] <= '9')
+		i++;
+	if(digit_str[i] != '\0')
+		return (1);
+	*num = (double)ft_atoi(digit_str) / 1000;
+	return(0);
+}
+
+int error_message(void)
+{
+	ft_putstr_fd("Please enter the following valuse\n ex:./a.out m\n \
+	ex:./a.out j -345 654", 2);
 	return (0);
 }

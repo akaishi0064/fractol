@@ -70,13 +70,13 @@ static long	min_atoi(const char *str)
 
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		flag;
-	long	nbr;
+//	int		i;
+//	int		flag;
+//	long	nbr;
 
-	i = 0;
-	flag = 0;
-	nbr = 0;
+//	i = 0;
+//	flag = 0;
+//	nbr = 0;
 	while (ft_skipspace(*str) == 1)
 		str++;
 	if (*str == '-')

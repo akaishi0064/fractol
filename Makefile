@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chakaish <chakaish@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: akaishichiharu <akaishichiharu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/11 13:35:16 by chakaish          #+#    #+#              #
-#    Updated: 2025/05/11 15:57:12 by chakaish         ###   ########.fr        #
+#    Updated: 2025/06/21 19:11:34 by akaishichih      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ OBJ_DIR		= obj
 #
 SRC					= \
 					main.c \
+					fractol.c \
+					mk_fractol.c \
 #					$(addprefix mlx_series/, $(MLX_SRC)) \
 #					$(addprefix init/, $(INIT_SRC)) \
 #					$(addprefix utils/, $(UTILS_SRC)) \
@@ -66,7 +68,7 @@ ifeq ($(UNAME), Darwin)
 							-L$(BREW_PREFIX)/opt/libxext/lib \
 							-L$(BREW_PREFIX)/opt/libbsd/lib
 
-		LFLAGS		+= $(X11_INC_DIRS)
+		LFLAGS		+= $(X11_LIB_DIRS)
 endif
 
 #**********#
